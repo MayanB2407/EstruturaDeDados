@@ -1,7 +1,7 @@
 package br.ifba.edu.lista;
 
 import br.ifba.edu.basica.Celula;
-
+import br.ifba.edu.funcao.*;
 public class Lista {
 	private Celula ponta;
 	private Celula rabo;
@@ -36,6 +36,36 @@ public class Lista {
 		Celula aux = this.ponta;
 		this.ponta = ponta.getProxima();
 		aux.setProxima(null);
+		this.totalElementos--;
+	}
+	
+	public void removeRabo() {
+		Celula aux = this.ponta;
+		this.ponta = ponta.getProxima();
+		for(int cont = 0; cont < totalElementos - 1; cont++) {
+			aux = aux.getProxima();
+		}
+		aux.setProxima(null);
+		this.totalElementos--;
+	}
+	public void removePosicao(int posicao) {
+		
+		Celula aux = this.ponta;
+		
+		if(posicao == 0) {
+			this.removePonta();
+		}else if(posicao == this.totalElementos) {
+			this.removeRabo();
+		}else if(posicao > 0 && posicao < totalElementos) {
+			for(int cont = 0; cont < posicao - 1; cont++) {
+			aux = aux.getProxima();
+			}
+			
+		aux.setProxima(aux.getProxima().getProxima());
+		}else {
+			System.out.println("Posição inválida");
+		}	
+			
 		this.totalElementos--;
 	}
 	
